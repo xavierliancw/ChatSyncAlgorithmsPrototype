@@ -8,19 +8,6 @@
 
 import UIKit
 
-struct DataThing: Hashable, Comparable, Equatable
-{
-    let value: Int
-    var color: UIColor
-    var isSynced: Bool {return color != .red}
-    var hashValue: Int {return value}
-    static func < (lhs: DataThing, rhs: DataThing) -> Bool {return lhs.value < rhs.value}
-    static func ==(lhs: DataThing, rhs: DataThing) -> Bool
-    {
-        return lhs.value == rhs.value && lhs.color == rhs.color
-    }
-}
-
 class ViewController: UIViewController
 {
     //MARK: Properties
@@ -47,20 +34,7 @@ class ViewController: UIViewController
     var expectedCV: UICollectionView!
     var resultCV: UICollectionView!
     
-    //MARK:- Functions
-    
-    func setUpAndPlaceResetBt()
-    {
-        resetBt.setTitle("Generate New Data And Reset", for: .normal)
-        resetBt.backgroundColor = .red
-        resetBt.addTarget(self, action: #selector(reset), for: .touchUpInside)
-        view.addSubview(resetBt)
-        resetBt.translatesAutoresizingMaskIntoConstraints = false
-        resetBt.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        resetBt.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        resetBt.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        resetBt.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-    }
+    //MARK: Functions
     
     @objc func reset()
     {
@@ -120,27 +94,32 @@ class ViewController: UIViewController
         return DataThing(value: value, color: whiteOrRed)
     }
     
-    func setUpAndPlacePerformBt()
-    {
-        performBt.setTitle("Perform Batch Updates", for: .normal)
-        performBt.backgroundColor = .blue
-        performBt.addTarget(self, action: #selector(performUpdate), for: .touchUpInside)
-        view.addSubview(performBt)
-        performBt.translatesAutoresizingMaskIntoConstraints = false
-        performBt.bottomAnchor.constraint(
-            equalTo: view.safeAreaLayoutGuide.bottomAnchor
-            ).isActive = true
-        performBt.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        performBt.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        performBt.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    }
-    
     @objc func performUpdate()
     {
         print("performing update not yet implemented")
     }
     
-    func setUpAndPlaceCVLbls()
+    //MARK: UI Business
+    
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        setUpAndPlaceResetBt()
+        setUpAndPlacePerformBt()
+        setUpAndPlaceCVLbls()
+        setUpAndPlaceCollectionViews()
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        reset()
+    }
+    
+    //MARK: Private Functions
+    
+    private func setUpAndPlaceCVLbls()
     {
         currentLbl.text = "Current\nModel"
         currentLbl.textColor = .white
@@ -195,7 +174,40 @@ class ViewController: UIViewController
         resultLbl.leadingAnchor.constraint(equalTo: expectedLbl.trailingAnchor).isActive = true
     }
     
-    func setUpAndPlaceCollectionViews()
+    private func setUpAndPlacePerformBt()
+    {
+        performBt.setTitle("Perform Batch Updates", for: .normal)
+        performBt.backgroundColor = .blue
+        performBt.addTarget(self, action: #selector(performUpdate), for: .touchUpInside)
+        view.addSubview(performBt)
+        performBt.translatesAutoresizingMaskIntoConstraints = false
+        performBt.bottomAnchor.constraint(
+            equalTo: view.safeAreaLayoutGuide.bottomAnchor
+            ).isActive = true
+        performBt.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        performBt.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        performBt.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
+    
+    private func setup(cv: UICollectionView, id: String)
+    {
+        if let flow = cv.collectionViewLayout as? UICollectionViewFlowLayout
+        {
+            flow.minimumLineSpacing = 3
+            flow.minimumInteritemSpacing = 3
+        }
+        cv.delegate = self
+        cv.dataSource = self
+        cv.alwaysBounceVertical = true
+        cv.register(LblCell.self, forCellWithReuseIdentifier: id)
+        view.addSubview(cv)
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        cv.topAnchor.constraint(equalTo: currentLbl.bottomAnchor).isActive = true
+        cv.bottomAnchor.constraint(equalTo: performBt.topAnchor).isActive = true
+        cv.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25).isActive = true
+    }
+    
+    private func setUpAndPlaceCollectionViews()
     {
         currentCV = UICollectionView(frame: .zero,
                                      collectionViewLayout: UICollectionViewFlowLayout())
@@ -222,40 +234,17 @@ class ViewController: UIViewController
         resultCV.leadingAnchor.constraint(equalTo: expectedCV.trailingAnchor).isActive = true
     }
     
-    func setup(cv: UICollectionView, id: String)
+    private func setUpAndPlaceResetBt()
     {
-        if let flow = cv.collectionViewLayout as? UICollectionViewFlowLayout
-        {
-            flow.minimumLineSpacing = 3
-            flow.minimumInteritemSpacing = 3
-        }
-        cv.delegate = self
-        cv.dataSource = self
-        cv.alwaysBounceVertical = true
-        cv.register(LblCell.self, forCellWithReuseIdentifier: id)
-        view.addSubview(cv)
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.topAnchor.constraint(equalTo: currentLbl.bottomAnchor).isActive = true
-        cv.bottomAnchor.constraint(equalTo: performBt.topAnchor).isActive = true
-        cv.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25).isActive = true
-    }
-    
-    //MARK:- UI Business
-    
-    override func viewDidLoad()
-    {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        setUpAndPlaceResetBt()
-        setUpAndPlacePerformBt()
-        setUpAndPlaceCVLbls()
-        setUpAndPlaceCollectionViews()
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        reset()
+        resetBt.setTitle("Generate New Data And Reset", for: .normal)
+        resetBt.backgroundColor = .red
+        resetBt.addTarget(self, action: #selector(reset), for: .touchUpInside)
+        view.addSubview(resetBt)
+        resetBt.translatesAutoresizingMaskIntoConstraints = false
+        resetBt.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        resetBt.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        resetBt.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        resetBt.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
     }
 }
 

@@ -15,6 +15,7 @@
 		25688E462081CC5900AAA988 /* ChatSyncAlgorithmsPrototypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25688E452081CC5900AAA988 /* ChatSyncAlgorithmsPrototypeTests.swift */; };
 		25688E512081CF9300AAA988 /* Algorithms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25688E502081CF9300AAA988 /* Algorithms.swift */; };
 		25688E532081CFB300AAA988 /* Data Structures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25688E522081CFB300AAA988 /* Data Structures.swift */; };
+		259E3E66208208F4006518C9 /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259E3E65208208F4006518C9 /* Objects.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		25688E472081CC5900AAA988 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25688E502081CF9300AAA988 /* Algorithms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithms.swift; sourceTree = "<group>"; };
 		25688E522081CFB300AAA988 /* Data Structures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data Structures.swift"; sourceTree = "<group>"; };
+		259E3E65208208F4006518C9 /* Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				25688E302081CC5800AAA988 /* AppDelegate.swift */,
 				25688E502081CF9300AAA988 /* Algorithms.swift */,
 				25688E322081CC5800AAA988 /* ViewController.swift */,
+				259E3E65208208F4006518C9 /* Objects.swift */,
 				25688E522081CFB300AAA988 /* Data Structures.swift */,
 				25688E342081CC5800AAA988 /* Main.storyboard */,
 				25688E372081CC5900AAA988 /* Assets.xcassets */,
@@ -204,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25688E332081CC5800AAA988 /* ViewController.swift in Sources */,
+				259E3E66208208F4006518C9 /* Objects.swift in Sources */,
 				25688E312081CC5800AAA988 /* AppDelegate.swift in Sources */,
 				25688E532081CFB300AAA988 /* Data Structures.swift in Sources */,
 				25688E512081CF9300AAA988 /* Algorithms.swift in Sources */,
