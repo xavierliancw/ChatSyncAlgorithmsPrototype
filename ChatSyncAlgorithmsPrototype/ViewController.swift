@@ -48,10 +48,10 @@ class ViewController: UIViewController
         resultData.removeAll()
         
         //Generate 2 arrays of random numbers
-        for _ in 0 ..< Int(arc4random_uniform(11))
+        for _ in 0 ..< Int(arc4random_uniform(110))
         {
-            randomSet1.append(Int(arc4random_uniform(UInt32(10))))
-            randomSet2.append(Int(arc4random_uniform(10)))
+            randomSet1.append(Int(arc4random_uniform(UInt32(100))))
+            randomSet2.append(Int(arc4random_uniform(50)))
         }
         //Data should all be unique and sorted
         randomSet1 = Array(Set(randomSet1)).sorted()
@@ -96,7 +96,30 @@ class ViewController: UIViewController
     
     @objc func performUpdate()
     {
-        print("performing update not yet implemented")
+        var wasAtBottom: Bool = resultCV.isAtOrPastBottom
+        var originalCount = resultData.count
+        var numberOfNew: Int {
+            let diff = resultData.count - originalCount
+            if diff > 0 {return diff} else {return 0}
+        }
+        resultData = incorporate(sortedUpdate: incomingData, intoSortedModel: currentData,
+                                 updateCondition: {$0.value == $1.value && $0.color != $1.color})
+        let _ = rearrangeAndObtainUnsyncedDict(from: &resultData)
+        
+        resultCV.performBatchUpdates({
+            self.resultCV.insertItems(at: Array(0 ..< numberOfNew).map {IndexPath(item: $0,
+                                                                                  section: 0)})
+            self.resultCV.reloadItems(at: resultCV.indexPathsForVisibleItems)
+        }, completion: { (completed) in
+            self.resultLbl.text = "After\nUpdates"
+            if wasAtBottom
+            {
+                self.resultCV.scrollToItem(
+                    at: IndexPath(item: self.resultData.count - 1, section: 0),
+                    at: .bottom, animated: true
+                )
+            }
+        })
     }
     
     //MARK: UI Business
