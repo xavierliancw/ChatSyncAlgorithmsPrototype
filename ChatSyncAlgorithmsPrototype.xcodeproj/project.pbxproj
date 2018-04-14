@@ -13,6 +13,8 @@
 		25688E382081CC5900AAA988 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25688E372081CC5900AAA988 /* Assets.xcassets */; };
 		25688E3B2081CC5900AAA988 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25688E392081CC5900AAA988 /* LaunchScreen.storyboard */; };
 		25688E462081CC5900AAA988 /* ChatSyncAlgorithmsPrototypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25688E452081CC5900AAA988 /* ChatSyncAlgorithmsPrototypeTests.swift */; };
+		25688E512081CF9300AAA988 /* Algorithms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25688E502081CF9300AAA988 /* Algorithms.swift */; };
+		25688E532081CFB300AAA988 /* Data Structures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25688E522081CFB300AAA988 /* Data Structures.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		25688E412081CC5900AAA988 /* ChatSyncAlgorithmsPrototypeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChatSyncAlgorithmsPrototypeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		25688E452081CC5900AAA988 /* ChatSyncAlgorithmsPrototypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSyncAlgorithmsPrototypeTests.swift; sourceTree = "<group>"; };
 		25688E472081CC5900AAA988 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		25688E502081CF9300AAA988 /* Algorithms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithms.swift; sourceTree = "<group>"; };
+		25688E522081CFB300AAA988 /* Data Structures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data Structures.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +82,9 @@
 			isa = PBXGroup;
 			children = (
 				25688E302081CC5800AAA988 /* AppDelegate.swift */,
+				25688E502081CF9300AAA988 /* Algorithms.swift */,
 				25688E322081CC5800AAA988 /* ViewController.swift */,
+				25688E522081CFB300AAA988 /* Data Structures.swift */,
 				25688E342081CC5800AAA988 /* Main.storyboard */,
 				25688E372081CC5900AAA988 /* Assets.xcassets */,
 				25688E392081CC5900AAA988 /* LaunchScreen.storyboard */,
@@ -199,6 +205,8 @@
 			files = (
 				25688E332081CC5800AAA988 /* ViewController.swift in Sources */,
 				25688E312081CC5800AAA988 /* AppDelegate.swift in Sources */,
+				25688E532081CFB300AAA988 /* Data Structures.swift in Sources */,
+				25688E512081CF9300AAA988 /* Algorithms.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
