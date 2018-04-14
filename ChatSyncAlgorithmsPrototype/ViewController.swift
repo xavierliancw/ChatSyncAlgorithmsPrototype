@@ -112,7 +112,7 @@ class ViewController: UIViewController
             self.resultCV.reloadItems(at: resultCV.indexPathsForVisibleItems)
         }, completion: { (completed) in
             self.resultLbl.text = "After\nUpdates"
-            if wasAtBottom
+            if wasAtBottom && !self.resultData.isEmpty
             {
                 self.resultCV.scrollToItem(
                     at: IndexPath(item: self.resultData.count - 1, section: 0),
