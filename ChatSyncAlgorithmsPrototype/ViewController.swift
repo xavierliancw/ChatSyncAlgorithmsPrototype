@@ -12,6 +12,7 @@ struct DataThing: Hashable, Comparable, Equatable
 {
     let value: Int
     var color: UIColor
+    var isSynced: Bool {return color != .red}
     var hashValue: Int {return value}
     static func < (lhs: DataThing, rhs: DataThing) -> Bool {return lhs.value < rhs.value}
     static func ==(lhs: DataThing, rhs: DataThing) -> Bool
@@ -96,6 +97,7 @@ class ViewController: UIViewController
         //then it should turn white in the expected data
         expectedData = incorporate(sortedUpdate: incomingData, intoSortedModel: currentData,
                                    updateCondition: {$0.value == $1.value && $0.color != $1.color})
+        let _ = rearrangeAndObtainUnsyncedDict(from: &expectedData)
         
         //Result data is the same as current until the batch update occurs
         resultData = currentData

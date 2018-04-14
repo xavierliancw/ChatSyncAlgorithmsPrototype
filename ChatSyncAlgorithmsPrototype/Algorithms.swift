@@ -8,6 +8,25 @@
 
 import Foundation
 
+func rearrangeAndObtainUnsyncedDict(from model: inout [DataThing]) -> [Int:DataThing]
+{
+    var dict = [Int:DataThing]()
+    var collected = [DataThing]()
+    
+    //Go backwards so removals work without crashing
+    for (x, data) in model.enumerated().reversed()
+    {
+        if data.color == .red
+        {
+            collected.append(data)
+            dict[data.value] = data
+            model.remove(at: x)
+        }
+    }
+    //Append collected back into the model
+    model.append(contentsOf: collected.reversed())  //Maintain original order
+    return dict
+}
 
 func incorporate<X: Comparable>(sortedUpdate update: [X], intoSortedModel current: [X],
                                 updateCondition: (_ lhs: X, _ rhs: X) -> (Bool)) -> [X]
@@ -86,6 +105,11 @@ func incorporate<X: Comparable>(sortedUpdate update: [X], intoSortedModel curren
                 currentCursor?.prev?.next = transferCursor
                 currentCursor?.next?.prev = transferCursor
                 
+                //If inserting at the first location, update first
+                if currentCursor! === currentLL.first!
+                {
+                    currentLL.first = transferCursor
+                }
                 //Expel the old value
                 currentCursor?.next = nil
                 currentCursor?.prev = nil
